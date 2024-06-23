@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>TASK MANAGER</title>
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Task Manager</h1>
+      </header>
+      <main>
+        <br />
+        <label
+          for="
+          input-box"
+          class="center-label"
+          >Task Name</label
+        >
+        <input
+          type="text"
+          id="input-box"
+          placeholder="Type your task name here"
+        />
+        <label
+          for="
+        description"
+          class="center-label"
+          >Task Description</label
+        >
+        <input
+          type="text"
+          id="description"
+          placeholder="Type your task description here"
+        />
+        <label
+          for="
+        start-date"
+          class="center-label"
+          >Start Date</label
+        >
+        <input type="date" id="start-date" /><br />
+        <label
+          for="
+        end-date"
+          class="center-label"
+          >End Date</label
+        >
+        <input type="date" id="end-date" /><br />
+        <label for="priority" class="center-label">Priority</label>
+        <select id="priority">
+          <option
+            value="default"
+            placeholder="Select a priority level for your task"
+          ></option>
+          <option value="highest">Highest</option>
+          <option value="high">High</option>
+          <option value="medium">Medium</option>
+          <option value="low">Low</option>
+        </select>
+        <button id="pressing-button" onclick="addingtask()">
+          Click to Add task
+        </button>
+        <ul id="task-list"></ul>
+        <p id="message">No Tasks Available!</p>
+      </main>
+    </div>
+    <script src="script.js"></script>
+  </body>
+</html>
