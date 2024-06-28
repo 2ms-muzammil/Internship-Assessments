@@ -1,4 +1,38 @@
-function addingtask() {
+function showForm() {
+  var test = document.getElementById("second-screen");
+  test.style.display = "block";
+}
+
+function goBack() {
+  var test = document.getElementById("second-screen");
+  test.style.display = "none";
+}
+
+function closeDeletePopup() {
+  var test = document.getElementById("outer-delete-div");
+  test.style.display = "none";
+}
+
+function showDelete(taskItem) {
+  var test = document.getElementById("outer-delete-div");
+  test.style.display = "block";
+
+  var confirmation = document.getElementById("confirm-delete-button");
+  confirmation.onclick = function () {
+    deleteTask(taskItem);
+    closeDeletePopup();
+  };
+}
+
+function deleteTask(taskItem) {
+  taskItem.remove();
+  let myAudio = document.querySelector("#audio");
+  myAudio.play();
+  saveData();
+}
+
+function addingtask(event) {
+  event.preventDefault();
   var taskname = document.getElementById("input-box");
   var description = document.getElementById("description");
   var startdate = document.getElementById("start-date");
@@ -20,7 +54,7 @@ function addingtask() {
   } else if (enddate.value === "") {
     alert("End date can't be empty");
     return;
-  } else if (prior.value === "default") {
+  } else if (prior.value === "") {
     alert("Please select a priority for your task");
     return;
   }
@@ -52,7 +86,7 @@ function addingtask() {
   deleteButton.className = "delete";
   deleteButton.textContent = "Delete";
   deleteButton.onclick = function () {
-    deleteTask(li);
+    showDelete(li);
   };
 
   taskActions.appendChild(editButton);
@@ -61,9 +95,7 @@ function addingtask() {
   li.appendChild(taskContent);
   li.appendChild(taskActions);
 
-  if (prior.value === "highest") {
-    li.classList.add("highest-priority");
-  } else if (prior.value === "high") {
+  if (prior.value === "high") {
     li.classList.add("high-priority");
   } else if (prior.value === "medium") {
     li.classList.add("medium-priority");
@@ -89,11 +121,7 @@ function addingtask() {
   startdate.value = "";
   enddate.value = "";
   prior.value = "";
-}
-
-function deleteTask(taskItem) {
-  taskItem.remove();
-  saveData();
+  goBack();
 }
 
 function editTask(taskItem, taskContent) {
@@ -122,23 +150,19 @@ function editTask(taskItem, taskContent) {
 
       // Remove existing priority classes
       taskItem.classList.remove(
-        "highest-priority",
         "high-priority",
         "medium-priority",
         "low-priority"
       );
 
       // Add new priority class
-      if (prior === "highest") {
-        taskItem.classList.add("highest-priority");
-      } else if (prior === "high") {
+      if (prior === "high") {
         taskItem.classList.add("high-priority");
       } else if (prior === "medium") {
         taskItem.classList.add("medium-priority");
       } else if (prior === "low") {
         taskItem.classList.add("low-priority");
       }
-
       saveData();
     } else {
       alert("End date cannot be before start date!");
