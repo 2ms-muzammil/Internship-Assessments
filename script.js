@@ -328,6 +328,8 @@ function sortTasks() {
       tasksArray.sort(function(a, b) {
           var priorityA = a.querySelector('span').textContent.split(" - ")[4];
           var priorityB = b.querySelector('span').textContent.split(" - ")[4];
+          console.log(priorityA);
+          console.log(priorityB);
           return getPriorityValue(priorityA) - getPriorityValue(priorityB);
       });
   } else if (sortOption === "Duedate") {
@@ -347,14 +349,14 @@ function sortTasks() {
 
 function getPriorityValue(priority) {
   switch (priority) {
-      case "High":
-          return 4;
-      case "Medium":
-          return 3;
-      case "Low":
-          return 2;
-      default:
+      case "Priority: High":
           return 1;
+      case "Priority: Medium":
+          return 2;
+      case "Priority: Low":
+          return 3;
+      default:
+          return 4;
   }
 }
 
