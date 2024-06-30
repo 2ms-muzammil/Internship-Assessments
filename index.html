@@ -1,72 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>TASK MANAGER</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <div class="container">
-      <header>
-        <h1>Task Manager</h1>
-      </header>
-      <main>
-        <br />
-        <label
-          for="
-          input-box"
-          class="center-label"
-          >Task Name</label
-        >
-        <input
-          type="text"
-          id="input-box"
-          placeholder="Type your task name here"
-        />
-        <label
-          for="
-        description"
-          class="center-label"
-          >Task Description</label
-        >
-        <input
-          type="text"
-          id="description"
-          placeholder="Type your task description here"
-        />
-        <label
-          for="
-        start-date"
-          class="center-label"
-          >Start Date</label
-        >
-        <input type="date" id="start-date" /><br />
-        <label
-          for="
-        end-date"
-          class="center-label"
-          >End Date</label
-        >
-        <input type="date" id="end-date" /><br />
-        <label for="priority" class="center-label">Priority</label>
-        <select id="priority">
-          <option
-            value="default"
-            placeholder="Select a priority level for your task"
-          ></option>
-          <option value="highest">Highest</option>
-          <option value="high">High</option>
-          <option value="medium">Medium</option>
-          <option value="low">Low</option>
-        </select>
-        <button id="pressing-button" onclick="addingtask()">
-          Click to Add task
-        </button>
-        <ul id="task-list"></ul>
-        <p id="message">No Tasks Available!</p>
-      </main>
-    </div>
-    <script src="script.js"></script>
-  </body>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>TASK MANAGER</title>
+  <link rel="stylesheet" href="styles.css" />
+  <audio id="audio" src="delete.mp3"></audio>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Task Manager</h1>
+    </header>
+    <main>
+      <button id="start-adding" onclick="showForm()" type="button">Add A Task</button>
+      <button id="filter-button" onclick="showFilter()" type="button">Filter</button>
+
+
+      <select id="sorting">
+        <option value="" disabled selected hidden>
+          Sort By
+        </option>
+        <option value="Priority">Priority</option>
+        <option value="Duedate">Due Date</option>
+      </select>
+      <button id="sort-button" onclick="sortTasks()">Sort</button>
+
+      <div id="second-screen">
+        <form id="form-container">
+          <label for="task-name" class="center-label">Task Name</label>
+          <input type="text" id="task-name" placeholder="Type your task name here" />
+          <label for="
+        description" class="center-label">Task Description</label>
+          <input type="text" id="description" placeholder="Type your task description here" />
+          <label for="
+        start-date" class="center-label">Start Date</label>
+          <input type="date" id="start-date" /><br>
+          <label for="
+        end-date" class="center-label">End Date</label>
+          <input type="date" id="end-date" /><br>
+          <label for="priority" class="center-label">Priority</label>
+          <select id="priority">
+            <option value="" disabled selected hidden>
+              Select a priority level for your task
+            </option>
+            <option value="High">High</option>
+            <option value="Medium">Medium</option>
+            <option value="Low">Low</option>
+          </select>
+          <label for="category" class="center-label">Category</label>
+          <select id="category">
+            <option value="" disabled selected hidden>
+              Select a category for your task
+            </option>
+            <option value="Work">Work</option>
+            <option value="Personal">Personal</option>
+            <option value="Other">Other</option>
+          </select>
+          <button id="click-to-add-task" onclick="addingtask(event)" type="button">Click to Add task</button>
+          <button onclick="goBack()" type="button">Back</button>
+
+          <!-- <button id="save-changes" onclick="saveChanges()" style="display: none;" type="button">Save Changes</button> -->
+        </form>
+      </div>
+
+      <div id="filter-container">
+        <div id="filter-options">
+          <label>Select Categorie(s)</label><br>
+          <label><input value="Work" type="checkbox" id="filter-category-work">Work</label>
+          <label><input value="Personal" type="checkbox" id="filter-category-personal">Personal</label>
+          <label><input value="Other" type="checkbox" id="filter-category-other">Other</label><br>
+
+          <label for="filter-status" class="center-label">Select a Status</label>
+          <select id="filter-status">
+            <option value="" disabled selected hidden>
+              Select a Status
+            </option>
+            <option value="All">All</option>
+            <option value="Completed">Completed</option>
+            <option value="Pending">Pending</option>
+          </select><br>
+          <button id="filter-tasks-button" onclick="filter()" type="button">Filter Tasks</button>
+          <button id="hide-filter-button" onclick="hideFilter(event)" type="button">Back</button>
+        </div>
+      </div>
+
+      <div id="outer-delete-div">
+        <div id="inner-delete-div">
+          <p>Are you sure you want to delete this task?</p>
+          <button type="button" id="confirm-delete-button">Delete</button>
+          <button type="button" onclick="closeDeletePopup()">Cancel</button>
+        </div>
+      </div>
+      <!-- <button id = "hide-filter-button" onclick="hideFilter()" type="button" style="display: none;">Back</button> -->
+      <ul id="task-list"></ul>
+      <p id="message">No Tasks Available!</p>
+    </main>
+  </div>
+  <script src="script.js"></script>
+</body>
 </html>
